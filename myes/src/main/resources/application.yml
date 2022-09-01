@@ -1,0 +1,38 @@
+
+
+
+
+mysql_url: 192.168.4.151:3306
+es_uris: 192.169.4.204:34913
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${mysql_url}/congress_new?createDatabaseIfNotExist=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    #    password: Root@hiekn##
+    password: root@hiekn
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: MY-ES
+      minimum-idle: 10
+      maximum-pool-size: 50
+      max-lifetime: 1800000
+      connection-timeout: 300000
+      validation-timeout: 50000
+      idle-timeout: 600000
+  elasticsearch:
+    rest:
+      uris: ${es_uris}
+      username: elastic
+      password: 123456
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+#        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+server:
+  netty:
+    initial-buffer-size:
+  shutdown: graceful
