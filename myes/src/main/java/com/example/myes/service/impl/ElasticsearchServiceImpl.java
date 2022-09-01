@@ -154,6 +154,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
             indexRequest.id(idStr);
             indexRequest.source(idDataMap.get(idStr));
             bulkRequest.add(indexRequest);
+
         }
 
         final BulkResponse bulkItemResponses = Try.of(() -> restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT)).get();
